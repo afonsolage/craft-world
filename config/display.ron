@@ -1,0 +1,4 @@
+(
+  title: "craft-world",
+  dimensions: Some((500, 500)),
+)
