@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'craft-world'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=craft-world",
+                    "--package=craft-world"
+                ],
+                "filter": {
+                    "name": "craft-world",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "env": {
+				"CARGO_MANIFEST_DIR":""
+			},
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'craft-world'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=craft-world",
+                    "--package=craft-world"
+                ],
+                "filter": {
+                    "name": "craft-world",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "env": {
+				"CARGO_MANIFEST_DIR":""
+			},
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

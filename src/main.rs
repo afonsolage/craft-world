@@ -1,5 +1,6 @@
 use amethyst::{
     core::transform::TransformBundle,
+    input::InputBundle,
     prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
@@ -8,12 +9,13 @@ use amethyst::{
     },
     utils::application_root_dir,
 };
+use resources::MoveBindingTypes;
+use states::WorldState;
 
-struct MyState;
-
-impl SimpleState for MyState {
-    fn on_start(&mut self, _data: StateData<'_, GameData<'_, '_>>) {}
-}
+mod components;
+mod resources;
+mod states;
+mod systems;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -24,6 +26,10 @@ fn main() -> amethyst::Result<()> {
     let config_dir = app_root.join("config");
     let display_config_path = config_dir.join("display.ron");
 
+    let input_config = config_dir.join("bindings.ron");
+    let input_bundle =
+        InputBundle::<MoveBindingTypes>::new().with_bindings_from_file(input_config)?;
+
     let game_data = GameDataBuilder::default()
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
@@ -33,9 +39,22 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderFlat2D::default()),
         )?
-        .with_bundle(TransformBundle::new())?;
+        .with_bundle(TransformBundle::new())?
+        .with_bundle(input_bundle)?
+        .with(systems::TerrainRenderSystem, "terrain_system", &[])
+        .with(systems::PlayerRenderSystem, "player_system", &[])
+        .with(
+            systems::PlayerMoveSystem,
+            "player_move_system",
+            &["input_system"],
+        )
+        .with(
+            systems::TerrainMoveSystem::new(10),
+            "terrain_move_system",
+            &[],
+        );
 
-    let mut game = Application::new(assets_dir, MyState, game_data)?;
+    let mut game = Application::new(assets_dir, WorldState, game_data)?;
     game.run();
 
     Ok(())

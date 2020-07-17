@@ -5,7 +5,10 @@ authors = []
 edition = "2018"
 
 [dependencies]
-amethyst = "0.15.0"
+amethyst = "0.15.*"
+serde = "1.0.*"
+log = "0.4.*"
+derivative = "2.1.*"
 
 [features]
 default = ["vulkan"]

@@ -1,0 +1,34 @@
+List((
+    texture_width: 1792,
+    texture_height: 736,
+    sprites: [
+        //Grass
+        (
+            x: 32,
+            y: 64,
+            width: 32,
+            height: 32,
+        ),
+        //GrassFlower
+        (
+            x: 32,
+            y: 224,
+            width: 32,
+            height: 32,
+        ),
+        //Sand
+        (
+            x: 192,
+            y: 64,
+            width: 32,
+            height: 32,
+        ),
+        //Dirt
+        (
+            x: 320,
+            y: 64,
+            width: 32,
+            height: 32,
+        ),
+    ]
+))
