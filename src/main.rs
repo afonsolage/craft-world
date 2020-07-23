@@ -25,10 +25,10 @@ fn main() -> amethyst::Result<()> {
     let assets_dir = app_root.join("assets");
     let config_dir = app_root.join("config");
     let display_config_path = config_dir.join("display.ron");
-
-    let input_config = config_dir.join("bindings.ron");
-    let input_bundle =
-        InputBundle::<MoveBindingTypes>::new().with_bindings_from_file(input_config)?;
+    let input_bundle = {
+        let input_config = config_dir.join("bindings.ron");
+        InputBundle::<MoveBindingTypes>::new().with_bindings_from_file(input_config)?
+    };
 
     let game_data = GameDataBuilder::default()
         .with_bundle(

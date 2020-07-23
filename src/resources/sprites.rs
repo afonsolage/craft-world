@@ -30,7 +30,6 @@ fn load_sprite_sheet(world: &World, name: &str) -> Handle<SpriteSheet> {
 }
 
 
-//TODO: Define Macro implement sprite assets
 macro_rules! impl_sprite_asset {
     ($tp:ident, $name:literal) => {
         #[derive(Clone)]

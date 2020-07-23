@@ -1,7 +1,4 @@
-use crate::{
-    components::Player,
-    resources::{MainPlayer, PlayerSpriteAsset},
-};
+use crate::{components::Player, resources::PlayerSpriteAsset};
 use amethyst::{ecs::prelude::*, renderer::SpriteRender};
 use log::error;
 
