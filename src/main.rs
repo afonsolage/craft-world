@@ -49,7 +49,7 @@ fn main() -> amethyst::Result<()> {
             &["input_system"],
         )
         .with(
-            systems::TerrainMoveSystem::new(10),
+            systems::TerrainMoveSystem::new(20),
             "terrain_move_system",
             &[],
         );

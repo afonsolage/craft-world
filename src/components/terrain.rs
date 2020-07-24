@@ -3,8 +3,8 @@ use amethyst::ecs::prelude::*;
 #[derive(Debug, Copy, Clone)]
 pub enum TerrainType {
     Grass,
-    _GrassFlower,
-    _Sand,
+    GrassFlower,
+    Sand,
     Dirt,
 }
 

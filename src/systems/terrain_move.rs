@@ -1,4 +1,4 @@
-use crate::{components::TerrainType, resources::MainPlayer};
+use crate::{components::TerrainType, resources::MainPlayer, resources::TerrainData};
 use amethyst::{
     core::{math::Vector3, Transform},
     ecs::prelude::*,
@@ -48,10 +48,14 @@ impl<'a> System<'a> for TerrainMoveSystem {
         WriteStorage<'a, TerrainType>,
         WriteStorage<'a, Transform>,
         Read<'a, MainPlayer>,
+        ReadExpect<'a, TerrainData>,
         Entities<'a>,
     );
 
-    fn run(&mut self, (mut types, mut transforms, main_player, entities): Self::SystemData) {
+    fn run(
+        &mut self,
+        (mut types, mut transforms, main_player, terrain_data, entities): Self::SystemData,
+    ) {
         if let Some(entity) = main_player.entity {
             if let Some(player_transform) = transforms.get(entity) {
                 let p_x = player_transform.translation().x as i32;
@@ -90,7 +94,7 @@ impl<'a> System<'a> for TerrainMoveSystem {
                         entities
                             .build_entity()
                             .with(transform, &mut transforms)
-                            .with(TerrainType::Dirt, &mut types)
+                            .with(terrain_data.type_at(x, y), &mut types)
                             .build();
                     });
             }

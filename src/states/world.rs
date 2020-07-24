@@ -1,6 +1,6 @@
 use crate::{
     components::Player,
-    resources::{MainPlayer, PlayerSpriteAsset, TerrainSpriteAsset},
+    resources::{MainPlayer, PlayerSpriteAsset, TerrainSpriteAsset, TerrainData},
 };
 use amethyst::{
     core::{math::Vector3, Transform},
@@ -17,6 +17,7 @@ impl SimpleState for WorldState {
         init_camera(world);
         init_sprites(world);
         init_entities(world);
+        init_terrain(world);
     }
 }
 
@@ -50,4 +51,8 @@ fn init_entities(world: &mut World) {
         .build();
 
     world.insert(MainPlayer::new(main_player));
+}
+
+fn init_terrain(world: &mut World) {
+    world.insert(TerrainData::new(200, 200));
 }
